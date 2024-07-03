@@ -24,17 +24,17 @@ public_users.post("/register", (req,res) => {
     return res.status(300).json({message: "username already exists"});}
 });
 
-let getList = new Promise((resolve,reject)=>{
-  resolve(JSON.stringify(books, null, 4));
-});
+
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
   //Write your code here
-  getList.then((message)=>{
-    res.send("from promise:"+message);
+  let getList = new Promise((resolve,reject)=>{
+    resolve(JSON.stringify(books, null, 4));
   });
-  res.send(JSON.stringify(books, null, 4));
+  getList.then((message)=>{
+    res.send(message);
+  });
 });
 
 
